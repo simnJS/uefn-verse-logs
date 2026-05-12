@@ -132,6 +132,46 @@
         "icon": "$(gear)"
       }
     ],
+    "keybindings": [
+      {
+        "command": "uefnVerseLogs.pickLatest",
+        "key": "ctrl+alt+v ctrl+w",
+        "mac": "cmd+alt+v cmd+w",
+        "when": "!uefnVerseLogs.active"
+      },
+      {
+        "command": "uefnVerseLogs.restart",
+        "key": "ctrl+alt+v ctrl+r",
+        "mac": "cmd+alt+v cmd+r",
+        "when": "uefnVerseLogs.active"
+      },
+      {
+        "command": "uefnVerseLogs.stop",
+        "key": "ctrl+alt+v ctrl+s",
+        "mac": "cmd+alt+v cmd+s",
+        "when": "uefnVerseLogs.active"
+      },
+      {
+        "command": "uefnVerseLogs.clear",
+        "key": "ctrl+alt+v ctrl+l",
+        "mac": "cmd+alt+v cmd+l"
+      },
+      {
+        "command": "uefnVerseLogs.showOutput",
+        "key": "ctrl+alt+v ctrl+o",
+        "mac": "cmd+alt+v cmd+o"
+      },
+      {
+        "command": "uefnVerseLogs.editFilters",
+        "key": "ctrl+alt+v ctrl+f",
+        "mac": "cmd+alt+v cmd+f"
+      },
+      {
+        "command": "uefnVerseLogs.printOnly",
+        "key": "ctrl+alt+v ctrl+p",
+        "mac": "cmd+alt+v cmd+p"
+      }
+    ],
     "menus": {
       "view/title": [
         {

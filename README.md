@@ -83,17 +83,19 @@ Save the file — the filter tree updates live.
 
 ## Commands
 
-| Command | Default keybinding | Description |
+All keybindings use a `Ctrl+Alt+V` chord (`Cmd+Alt+V` on macOS) followed by a second key. They're rebindable in **Preferences: Open Keyboard Shortcuts**.
+
+| Command | Keybinding | Description |
 | --- | --- | --- |
-| `UEFN Verse: Watch latest log` | — | Start tailing `UnrealEditorFortnite.log`. |
+| `UEFN Verse: Watch latest log` | `Ctrl+Alt+V Ctrl+W` | Start tailing `UnrealEditorFortnite.log`. |
 | `UEFN Verse: Start watching log…` | — | Pick any `.log` file in the UEFN logs folder. |
-| `UEFN Verse: Stop watching` | — | Stop the tail. |
-| `UEFN Verse: Restart tail` | — | Stop and re-start the tail on the same log. Resets stats and re-detects the project. |
-| `UEFN Verse: Toggle filters…` | — | Multi-select picker for categories + levels. |
-| `UEFN Verse: Show Print() output only` | — | Preset: keep only `LogVerse`. |
+| `UEFN Verse: Restart tail` | `Ctrl+Alt+V Ctrl+R` | Stop and re-start the tail on the same log. Resets stats and re-detects the project. |
+| `UEFN Verse: Stop watching` | `Ctrl+Alt+V Ctrl+S` | Stop the tail. |
+| `UEFN Verse: Toggle filters…` | `Ctrl+Alt+V Ctrl+F` | Multi-select picker for categories + levels. |
+| `UEFN Verse: Show Print() output only` | `Ctrl+Alt+V Ctrl+P` | Preset: keep only `LogVerse`. |
 | `UEFN Verse: Reset filters` | — | Restore default checkbox state. |
-| `UEFN Verse: Clear output` | — | Empty the output channel. |
-| `UEFN Verse: Open output panel` | — | Reveal the **UEFN Verse** output. |
+| `UEFN Verse: Clear output` | `Ctrl+Alt+V Ctrl+L` | Empty the output channel. |
+| `UEFN Verse: Open output panel` | `Ctrl+Alt+V Ctrl+O` | Reveal the **UEFN Verse** output. |
 | `UEFN Verse: Open settings` | — | Jump to the extension's settings UI. |
 
 All commands are also available as toolbar buttons in the **UEFN Verse** view title.
