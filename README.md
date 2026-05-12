@@ -2,9 +2,8 @@
 
 > Stream Verse logs from Unreal Editor for Fortnite directly into VS Code, with per-category and per-level filtering.
 
-[![Visual Studio Marketplace Version](https://img.shields.io/visual-studio-marketplace/v/simnjs.uefn-verse-logs?label=Marketplace&color=007ACC)](https://marketplace.visualstudio.com/items?itemName=simnjs.uefn-verse-logs)
-[![Installs](https://img.shields.io/visual-studio-marketplace/i/simnjs.uefn-verse-logs)](https://marketplace.visualstudio.com/items?itemName=simnjs.uefn-verse-logs)
-[![Rating](https://img.shields.io/visual-studio-marketplace/r/simnjs.uefn-verse-logs)](https://marketplace.visualstudio.com/items?itemName=simnjs.uefn-verse-logs&ssr=false#review-details)
+[![Marketplace](https://img.shields.io/badge/VS%20Code-Marketplace-007ACC?logo=visualstudiocode&logoColor=white)](https://marketplace.visualstudio.com/items?itemName=simnjs.uefn-verse-logs)
+[![Install](https://img.shields.io/badge/install-code%20--install--extension%20simnjs.uefn--verse--logs-007ACC)](https://marketplace.visualstudio.com/items?itemName=simnjs.uefn-verse-logs)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 
 Tail the UEFN log file live, parse out the Verse-related categories, and watch your `Print()` output stream into a VS Code output channel — colored by log level, filtered by category, and synced with the project you have open.
