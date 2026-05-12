@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.1.2 - 2026-05-12
+
+- **Fix**: short `Print()` payloads (e.g. `Print("a")`) now appear immediately. The tail keeps a `FileHandle` open and reads from it directly — `fs.stat()` on Windows lags behind `write()` because the metadata commit lags behind the cache, so single-character writes were invisible until something else flushed.
+- Remove the `Levels` section from the filter tree — use VS Code's built-in log-level filter (funnel icon on the output panel) instead. The filter tree is now a flat list of categories.
+- Clearer description for `uefnVerseLogs.categories` in the Marketplace settings page.
+
 ## 0.1.1 - 2026-05-12
 
 - Translate every UI string from French to English (TreeView sections, QuickPick placeholders, status bar tooltip, error messages).
