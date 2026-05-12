@@ -2,7 +2,7 @@ import * as vscode from 'vscode';
 import * as fs from 'fs';
 import * as path from 'path';
 
-import { ALL_LEVELS, LogLevel, getConfig } from './config';
+import { LogLevel, getConfig } from './config';
 import { detectUefnProject } from './project';
 import { FilterState, FilterTreeProvider, FilterNode } from './filters';
 import { Tailer, TailerStats } from './tailer';
@@ -144,46 +144,28 @@ async function autoStart() {
   await startTail(logPath);
 }
 
-interface FilterPickItem extends vscode.QuickPickItem {
-  filterKind: 'category' | 'level';
-  filterKey: string;
+interface CategoryPickItem extends vscode.QuickPickItem {
+  category: string;
 }
 
 async function editFiltersQuick() {
-  const items: FilterPickItem[] = [
-    ...[...filters.categories.entries()].map(
-      ([cat, enabled]): FilterPickItem => ({
-        label: cat,
-        description: 'category',
-        filterKind: 'category',
-        filterKey: cat,
-        picked: enabled,
-      }),
-    ),
-    ...[...filters.levels.entries()].map(
-      ([lvl, enabled]): FilterPickItem => ({
-        label: lvl,
-        description: 'level',
-        filterKind: 'level',
-        filterKey: lvl,
-        picked: enabled,
-      }),
-    ),
-  ];
+  const items: CategoryPickItem[] = [...filters.categories.entries()].map(
+    ([cat, enabled]): CategoryPickItem => ({
+      label: cat,
+      category: cat,
+      picked: enabled,
+    }),
+  );
 
-  const picked = await vscode.window.showQuickPick<FilterPickItem>(items, {
+  const picked = await vscode.window.showQuickPick<CategoryPickItem>(items, {
     canPickMany: true,
-    placeHolder: 'Select categories and levels to show',
-    matchOnDescription: true,
+    placeHolder: 'Select categories to show',
   });
   if (!picked) return;
 
-  const selected = new Set(picked.map(i => `${i.filterKind}:${i.filterKey}`));
+  const selected = new Set(picked.map(i => i.category));
   for (const cat of filters.categories.keys()) {
-    filters.setCategory(cat, selected.has(`category:${cat}`));
-  }
-  for (const lvl of filters.levels.keys()) {
-    filters.setLevel(lvl, selected.has(`level:${lvl}`));
+    filters.setCategory(cat, selected.has(cat));
   }
 }
 
@@ -215,9 +197,7 @@ export async function activate(context: vscode.ExtensionContext) {
 
   treeView.onDidChangeCheckboxState(e => {
     for (const [node, state] of e.items) {
-      const checked = state === vscode.TreeItemCheckboxState.Checked;
-      if (node.kind === 'category') filters.setCategory(node.id, checked);
-      else if (node.kind === 'level') filters.setLevel(node.id, checked);
+      filters.setCategory(node.id, state === vscode.TreeItemCheckboxState.Checked);
     }
   });
 
@@ -264,18 +244,8 @@ export async function activate(context: vscode.ExtensionContext) {
       filters.printOnly();
       output.info('--- preset: Print() only ---');
     }),
-    vscode.commands.registerCommand('uefnVerseLogs.allCategoriesOn', () =>
-      filters.setAll('categories', true),
-    ),
-    vscode.commands.registerCommand('uefnVerseLogs.allCategoriesOff', () =>
-      filters.setAll('categories', false),
-    ),
-    vscode.commands.registerCommand('uefnVerseLogs.allLevelsOn', () =>
-      filters.setAll('levels', true),
-    ),
-    vscode.commands.registerCommand('uefnVerseLogs.allLevelsOff', () =>
-      filters.setAll('levels', false),
-    ),
+    vscode.commands.registerCommand('uefnVerseLogs.allCategoriesOn', () => filters.setAll(true)),
+    vscode.commands.registerCommand('uefnVerseLogs.allCategoriesOff', () => filters.setAll(false)),
     vscode.commands.registerCommand('uefnVerseLogs.openSettings', () =>
       vscode.commands.executeCommand('workbench.action.openSettings', '@ext:simnjs.uefn-verse-logs'),
     ),
@@ -299,5 +269,3 @@ export function deactivate() {
   tailer?.stop();
 }
 
-// Re-export so tsc keeps the symbols even if unused above (helps IDE jumps).
-export { ALL_LEVELS };

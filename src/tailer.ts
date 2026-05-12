@@ -136,7 +136,6 @@ export class Tailer {
       if (!parsed) continue;
 
       if (!matchesPrefix(parsed.category, enabledCats)) continue;
-      if (!this.filters.isLevelEnabled(parsed.level)) continue;
 
       const parts: string[] = [];
       if (config.showTimestamp) parts.push(`[${parsed.timestamp}]`);

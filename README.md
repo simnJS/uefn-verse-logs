@@ -33,7 +33,7 @@ If autostart didn't kick in, click the `Verse: stopped` indicator in the status 
 
 - **Auto-detect the UEFN project** in your workspace via `.uefnproject` (walks up parent folders from each workspace folder).
 - **Live tail** of `%LOCALAPPDATA%\UnrealEditorFortnite\Saved\Logs\UnrealEditorFortnite.log` with rotation handling.
-- **Filter tree** in the Explorer sidebar — checkboxes per category and per log level. State persists across sessions.
+- **Filter tree** in the Explorer sidebar — checkbox per category. State persists across sessions. Use VS Code's built-in log-level filter (funnel icon on the output panel) for per-level filtering.
 - **Quick filter picker** (`UEFN Verse: Toggle filters…`) — fast multi-select for power users.
 - **"Print() only" preset** — one click, only `LogVerse` lines remain.
 - **Restart command** to reset stats and re-detect the project without leaving the keyboard.
@@ -43,11 +43,7 @@ If autostart didn't kick in, click the `Verse: stopped` indicator in the status 
 
 ## Filters
 
-Open the **UEFN Verse** view in the Explorer sidebar. Two sections (`Categories` and `Levels`):
-
-### Categories
-
-The categories from `uefnVerseLogs.categories` (plus any custom you add):
+Open the **UEFN Verse** view in the Explorer sidebar. Each entry from `uefnVerseLogs.categories` appears as a checkbox you can toggle at runtime:
 
 | Category | Default | What it carries |
 | --- | --- | --- |
@@ -60,9 +56,7 @@ The categories from `uefnVerseLogs.categories` (plus any custom you add):
 | `LogVersePredicts` | off | Prediction context registration (chatty) |
 | `LogVerseUObjectGenerator` | off | Generated UObject events |
 
-### Levels
-
-`Fatal`, `Error`, `Warning`, `Display`, `Log`, `Verbose`, `VeryVerbose`. A line shows up only if **both** its category and its level are enabled.
+For per-level filtering, use the VS Code log channel's own controls: the funnel icon at the top of the **UEFN Verse** output panel (`Filter Output by Log Level` for show/hide, `Set Log Level` for the threshold). UEFN levels are mapped to VS Code levels as `Fatal/Error → Error`, `Warning → Warning`, `Display/Log → Info`, `Verbose/VeryVerbose → Debug`.
 
 ### Adding custom categories
 
@@ -91,7 +85,7 @@ All keybindings use a `Ctrl+Alt+V` chord (`Cmd+Alt+V` on macOS) followed by a se
 | `UEFN Verse: Start watching log…` | — | Pick any `.log` file in the UEFN logs folder. |
 | `UEFN Verse: Restart tail` | `Ctrl+Alt+V Ctrl+R` | Stop and re-start the tail on the same log. Resets stats and re-detects the project. |
 | `UEFN Verse: Stop watching` | `Ctrl+Alt+V Ctrl+S` | Stop the tail. |
-| `UEFN Verse: Toggle filters…` | `Ctrl+Alt+V Ctrl+F` | Multi-select picker for categories + levels. |
+| `UEFN Verse: Toggle filters…` | `Ctrl+Alt+V Ctrl+F` | Multi-select picker for categories. |
 | `UEFN Verse: Show Print() output only` | `Ctrl+Alt+V Ctrl+P` | Preset: keep only `LogVerse`. |
 | `UEFN Verse: Reset filters` | — | Restore default checkbox state. |
 | `UEFN Verse: Clear output` | `Ctrl+Alt+V Ctrl+L` | Empty the output channel. |

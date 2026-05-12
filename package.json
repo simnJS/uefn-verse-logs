@@ -114,18 +114,6 @@
         "icon": "$(close-all)"
       },
       {
-        "command": "uefnVerseLogs.allLevelsOn",
-        "title": "Enable all levels",
-        "category": "UEFN Verse",
-        "icon": "$(check-all)"
-      },
-      {
-        "command": "uefnVerseLogs.allLevelsOff",
-        "title": "Disable all levels",
-        "category": "UEFN Verse",
-        "icon": "$(close-all)"
-      },
-      {
         "command": "uefnVerseLogs.openSettings",
         "title": "Open settings",
         "category": "UEFN Verse",
@@ -220,45 +208,7 @@
           "group": "9_misc"
         }
       ],
-      "view/item/context": [
-        {
-          "command": "uefnVerseLogs.allCategoriesOn",
-          "when": "view == uefnVerseFilters && viewItem == section.categories",
-          "group": "inline@1"
-        },
-        {
-          "command": "uefnVerseLogs.allCategoriesOff",
-          "when": "view == uefnVerseFilters && viewItem == section.categories",
-          "group": "inline@2"
-        },
-        {
-          "command": "uefnVerseLogs.allLevelsOn",
-          "when": "view == uefnVerseFilters && viewItem == section.levels",
-          "group": "inline@1"
-        },
-        {
-          "command": "uefnVerseLogs.allLevelsOff",
-          "when": "view == uefnVerseFilters && viewItem == section.levels",
-          "group": "inline@2"
-        }
-      ],
       "commandPalette": [
-        {
-          "command": "uefnVerseLogs.allCategoriesOn",
-          "when": "false"
-        },
-        {
-          "command": "uefnVerseLogs.allCategoriesOff",
-          "when": "false"
-        },
-        {
-          "command": "uefnVerseLogs.allLevelsOn",
-          "when": "false"
-        },
-        {
-          "command": "uefnVerseLogs.allLevelsOff",
-          "when": "false"
-        },
         {
           "command": "uefnVerseLogs.restart",
           "when": "uefnVerseLogs.active"
@@ -300,7 +250,7 @@
             "VerseProfile",
             "VerseTest"
           ],
-          "markdownDescription": "Categories shown in the filter panel. Lines are kept when their category **starts with** any of these. Add your own (e.g. `LogValkyrie`, `Cmd`, `LogFortMatchmakingV2`) to track non-Verse logs."
+          "markdownDescription": "Log category prefixes to keep. Lines whose category **starts with** any listed prefix are emitted; everything else is dropped. Each entry also appears as a checkbox in the filter tree, so you can toggle them at runtime. Add your own (e.g. `LogValkyrie`, `Cmd`, `LogFortMatchmakingV2`) to follow non-Verse logs."
         },
         "uefnVerseLogs.pollIntervalMs": {
           "type": "number",
