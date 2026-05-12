@@ -23,6 +23,8 @@ export const DEFAULT_CATEGORIES: readonly string[] = [
   'LogVersePredicts',
   'LogVerseUObjectGenerator',
   'VerseBuild',
+  'VerseProfile',
+  'VerseTest',
 ];
 
 // Categories that fire constantly during UEFN startup but rarely carry

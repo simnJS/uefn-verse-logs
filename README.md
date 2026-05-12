@@ -53,6 +53,8 @@ The categories from `uefnVerseLogs.categories` (plus any custom you add):
 | --- | --- | --- |
 | `LogVerse` | on | `Print()` output from your Verse code |
 | `VerseBuild` | on | Compile errors, hot reload events |
+| `VerseProfile` | on | Profiling output |
+| `VerseTest` | on | Test framework output |
 | `LogVerseInterop` | off | VNI module loading (chatty at startup) |
 | `LogVerseMessageServer` | off | Verse message server lifecycle |
 | `LogVersePredicts` | off | Prediction context registration (chatty) |

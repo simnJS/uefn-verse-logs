@@ -271,7 +271,9 @@
             "LogVerseMessageServer",
             "LogVersePredicts",
             "LogVerseUObjectGenerator",
-            "VerseBuild"
+            "VerseBuild",
+            "VerseProfile",
+            "VerseTest"
           ],
           "markdownDescription": "Categories shown in the filter panel. Lines are kept when their category **starts with** any of these. Add your own (e.g. `LogValkyrie`, `Cmd`, `LogFortMatchmakingV2`) to track non-Verse logs."
         },
