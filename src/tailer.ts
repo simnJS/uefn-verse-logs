@@ -2,7 +2,7 @@ import * as vscode from 'vscode';
 import * as fs from 'fs';
 import * as path from 'path';
 
-import { Config, LogLevel } from './config';
+import { Config, LogLevel, getConfig } from './config';
 import { FilterState } from './filters';
 import { parseLine, matchesPrefix } from './parser';
 
@@ -62,9 +62,22 @@ export class Tailer {
     this.stats = { totalLines: 0, emittedLines: 0, errors: 0, warnings: 0 };
     this.events.onStats(this.stats);
 
-    this.timer = setInterval(() => void this.readDelta(config), config.pollIntervalMs);
+    this.startTimer(config.pollIntervalMs);
     this.events.onStateChange();
     return true;
+  }
+
+  // Recreate the timer with the current pollIntervalMs (call after settings change).
+  restartTimer() {
+    if (!this.timer) return;
+    this.startTimer(getConfig().pollIntervalMs);
+  }
+
+  private startTimer(intervalMs: number) {
+    if (this.timer) clearInterval(this.timer);
+    // Re-read getConfig() on every tick so toggling showTimestamp / showCategory
+    // in settings.json takes effect immediately, without restarting the tail.
+    this.timer = setInterval(() => void this.readDelta(getConfig()), intervalMs);
   }
 
   stop() {

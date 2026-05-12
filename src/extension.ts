@@ -286,6 +286,9 @@ export async function activate(context: vscode.ExtensionContext) {
       if (e.affectsConfiguration('uefnVerseLogs.categories')) {
         filters.syncCategoryList(getConfig().categories);
       }
+      if (e.affectsConfiguration('uefnVerseLogs.pollIntervalMs')) {
+        tailer.restartTimer();
+      }
     }),
     vscode.workspace.onDidChangeWorkspaceFolders(() => void autoStart()),
   );
