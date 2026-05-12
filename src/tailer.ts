@@ -51,7 +51,7 @@ export class Tailer {
     this.stop();
     const stat = await fs.promises.stat(logPath).catch(() => undefined);
     if (!stat) {
-      vscode.window.showErrorMessage(`Fichier introuvable : ${logPath}`);
+      vscode.window.showErrorMessage(`File not found: ${logPath}`);
       return false;
     }
     this.currentPath = logPath;

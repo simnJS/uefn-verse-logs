@@ -145,8 +145,8 @@ export class FilterTreeProvider implements vscode.TreeDataProvider<FilterNode> {
   getChildren(node?: FilterNode): FilterNode[] {
     if (!node) {
       return [
-        { kind: 'section', id: 'categories', label: 'Catégories' },
-        { kind: 'section', id: 'levels', label: 'Niveaux' },
+        { kind: 'section', id: 'categories', label: 'Categories' },
+        { kind: 'section', id: 'levels', label: 'Levels' },
       ];
     }
     if (node.kind === 'section' && node.id === 'categories') {

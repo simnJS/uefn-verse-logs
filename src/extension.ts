@@ -37,7 +37,7 @@ function emitByLevel(message: string, level: LogLevel | undefined) {
 function updateStatus() {
   if (!tailer.isRunning) {
     status.text = '$(eye-closed) Verse';
-    status.tooltip = 'UEFN Verse — démarrer le tail';
+    status.tooltip = 'UEFN Verse — click to start tailing';
     status.command = 'uefnVerseLogs.pickLatest';
     status.backgroundColor = undefined;
     setContext('uefnVerseLogs.active', false);
@@ -58,12 +58,12 @@ function updateStatus() {
       '',
       `\`${tailer.path}\``,
       '',
-      `Lignes lues : ${stats.totalLines}`,
-      `Lignes émises : ${stats.emittedLines}`,
-      `Warnings : ${stats.warnings}`,
-      `Errors : ${stats.errors}`,
+      `Lines read: ${stats.totalLines}`,
+      `Lines emitted: ${stats.emittedLines}`,
+      `Warnings: ${stats.warnings}`,
+      `Errors: ${stats.errors}`,
       '',
-      'Clic : ouvrir le panneau Output',
+      'Click to open the output panel',
     ].join('\n'),
   );
   status.command = 'uefnVerseLogs.showOutput';
@@ -99,10 +99,10 @@ async function pickLogFile(): Promise<string | undefined> {
     detail: l.path,
     fsPath: l.path,
   }));
-  items.push({ label: '$(folder-opened) Parcourir…', detail: 'Choisir un .log manuellement' });
+  items.push({ label: '$(folder-opened) Browse…', detail: 'Pick a .log file manually' });
 
   const pick = await vscode.window.showQuickPick(items, {
-    placeHolder: `Logs dans ${logDirectory}`,
+    placeHolder: `Logs in ${logDirectory}`,
     matchOnDescription: true,
     matchOnDetail: true,
   });
@@ -157,7 +157,7 @@ async function editFiltersQuick() {
     ...[...filters.categories.entries()].map(
       ([cat, enabled]): FilterPickItem => ({
         label: cat,
-        description: 'catégorie',
+        description: 'category',
         filterKind: 'category',
         filterKey: cat,
         picked: enabled,
@@ -166,7 +166,7 @@ async function editFiltersQuick() {
     ...[...filters.levels.entries()].map(
       ([lvl, enabled]): FilterPickItem => ({
         label: lvl,
-        description: 'niveau',
+        description: 'level',
         filterKind: 'level',
         filterKey: lvl,
         picked: enabled,
@@ -176,7 +176,7 @@ async function editFiltersQuick() {
 
   const picked = await vscode.window.showQuickPick<FilterPickItem>(items, {
     canPickMany: true,
-    placeHolder: 'Sélectionner catégories et niveaux à afficher',
+    placeHolder: 'Select categories and levels to show',
     matchOnDescription: true,
   });
   if (!picked) return;

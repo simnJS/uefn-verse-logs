@@ -43,11 +43,11 @@ If autostart didn't kick in, click the `Verse: stopped` indicator in the status 
 
 ## Filters
 
-Open the **UEFN Verse** view in the Explorer sidebar. Two sections:
+Open the **UEFN Verse** view in the Explorer sidebar. Two sections (`Categories` and `Levels`):
 
-### Catégories
+### Categories
 
-The categories from `uefnVerseLogs.categories` settings (plus any custom you add):
+The categories from `uefnVerseLogs.categories` (plus any custom you add):
 
 | Category | Default | What it carries |
 | --- | --- | --- |
@@ -58,7 +58,7 @@ The categories from `uefnVerseLogs.categories` settings (plus any custom you add
 | `LogVersePredicts` | off | Prediction context registration (chatty) |
 | `LogVerseUObjectGenerator` | off | Generated UObject events |
 
-### Niveaux
+### Levels
 
 `Fatal`, `Error`, `Warning`, `Display`, `Log`, `Verbose`, `VeryVerbose`. A line shows up only if **both** its category and its level are enabled.
 
