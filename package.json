@@ -283,8 +283,8 @@
         },
         "uefnVerseLogs.showTimestamp": {
           "type": "boolean",
-          "default": true,
-          "description": "Prefix each emitted line with the UEFN timestamp."
+          "default": false,
+          "description": "Prefix each emitted line with the UEFN timestamp. Off by default because the VS Code log channel already adds its own local timestamp — enable this if you need the original UEFN runtime timestamp (UTC, millisecond precision)."
         },
         "uefnVerseLogs.showCategory": {
           "type": "boolean",

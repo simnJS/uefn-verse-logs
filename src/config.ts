@@ -63,7 +63,7 @@ export function getConfig(): Config {
     categories: cfg.get<string[]>('categories') ?? [...DEFAULT_CATEGORIES],
     pollIntervalMs: cfg.get<number>('pollIntervalMs') ?? 500,
     autoStart: cfg.get<boolean>('autoStart') ?? true,
-    showTimestamp: cfg.get<boolean>('showTimestamp') ?? true,
+    showTimestamp: cfg.get<boolean>('showTimestamp') ?? false,
     showCategory: cfg.get<boolean>('showCategory') ?? true,
     showProjectHeader: cfg.get<boolean>('showProjectHeader') ?? true,
     revealOnError: cfg.get<boolean>('revealOnError') ?? false,
