@@ -1,0 +1,316 @@
+{
+  "name": "uefn-verse-logs",
+  "displayName": "UEFN Verse Logs",
+  "description": "Stream Verse logs from UEFN into VS Code with per-category and per-level filters.",
+  "version": "0.1.0",
+  "publisher": "simnjs",
+  "license": "MIT",
+  "author": {
+    "name": "simnjs"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/simnjs/uefn-verse-logs.git"
+  },
+  "bugs": {
+    "url": "https://github.com/simnjs/uefn-verse-logs/issues"
+  },
+  "homepage": "https://github.com/simnjs/uefn-verse-logs#readme",
+  "engines": {
+    "vscode": "^1.85.0"
+  },
+  "categories": [
+    "Other",
+    "Debuggers"
+  ],
+  "keywords": [
+    "uefn",
+    "unreal",
+    "verse",
+    "fortnite",
+    "logs",
+    "tail"
+  ],
+  "activationEvents": [
+    "onStartupFinished"
+  ],
+  "main": "./out/extension.js",
+  "contributes": {
+    "views": {
+      "explorer": [
+        {
+          "id": "uefnVerseFilters",
+          "name": "UEFN Verse",
+          "icon": "$(eye)",
+          "contextualTitle": "UEFN Verse Filters"
+        }
+      ]
+    },
+    "commands": [
+      {
+        "command": "uefnVerseLogs.pickLatest",
+        "title": "Watch latest log",
+        "category": "UEFN Verse",
+        "icon": "$(play)"
+      },
+      {
+        "command": "uefnVerseLogs.start",
+        "title": "Start watching log…",
+        "category": "UEFN Verse",
+        "icon": "$(play-circle)"
+      },
+      {
+        "command": "uefnVerseLogs.stop",
+        "title": "Stop watching",
+        "category": "UEFN Verse",
+        "icon": "$(stop-circle)"
+      },
+      {
+        "command": "uefnVerseLogs.pause",
+        "title": "Pause",
+        "category": "UEFN Verse",
+        "icon": "$(debug-pause)"
+      },
+      {
+        "command": "uefnVerseLogs.resume",
+        "title": "Resume",
+        "category": "UEFN Verse",
+        "icon": "$(debug-start)"
+      },
+      {
+        "command": "uefnVerseLogs.clear",
+        "title": "Clear output",
+        "category": "UEFN Verse",
+        "icon": "$(clear-all)"
+      },
+      {
+        "command": "uefnVerseLogs.showOutput",
+        "title": "Open output panel",
+        "category": "UEFN Verse",
+        "icon": "$(output)"
+      },
+      {
+        "command": "uefnVerseLogs.editFilters",
+        "title": "Toggle filters…",
+        "category": "UEFN Verse",
+        "icon": "$(filter)"
+      },
+      {
+        "command": "uefnVerseLogs.resetFilters",
+        "title": "Reset filters",
+        "category": "UEFN Verse",
+        "icon": "$(refresh)"
+      },
+      {
+        "command": "uefnVerseLogs.printOnly",
+        "title": "Show Print() output only",
+        "category": "UEFN Verse",
+        "icon": "$(symbol-string)"
+      },
+      {
+        "command": "uefnVerseLogs.allCategoriesOn",
+        "title": "Enable all categories",
+        "category": "UEFN Verse",
+        "icon": "$(check-all)"
+      },
+      {
+        "command": "uefnVerseLogs.allCategoriesOff",
+        "title": "Disable all categories",
+        "category": "UEFN Verse",
+        "icon": "$(close-all)"
+      },
+      {
+        "command": "uefnVerseLogs.allLevelsOn",
+        "title": "Enable all levels",
+        "category": "UEFN Verse",
+        "icon": "$(check-all)"
+      },
+      {
+        "command": "uefnVerseLogs.allLevelsOff",
+        "title": "Disable all levels",
+        "category": "UEFN Verse",
+        "icon": "$(close-all)"
+      },
+      {
+        "command": "uefnVerseLogs.openSettings",
+        "title": "Open settings",
+        "category": "UEFN Verse",
+        "icon": "$(gear)"
+      }
+    ],
+    "menus": {
+      "view/title": [
+        {
+          "command": "uefnVerseLogs.pickLatest",
+          "when": "view == uefnVerseFilters && !uefnVerseLogs.active",
+          "group": "navigation@1"
+        },
+        {
+          "command": "uefnVerseLogs.resume",
+          "when": "view == uefnVerseFilters && uefnVerseLogs.active && uefnVerseLogs.paused",
+          "group": "navigation@1"
+        },
+        {
+          "command": "uefnVerseLogs.pause",
+          "when": "view == uefnVerseFilters && uefnVerseLogs.active && !uefnVerseLogs.paused",
+          "group": "navigation@1"
+        },
+        {
+          "command": "uefnVerseLogs.stop",
+          "when": "view == uefnVerseFilters && uefnVerseLogs.active",
+          "group": "navigation@2"
+        },
+        {
+          "command": "uefnVerseLogs.showOutput",
+          "when": "view == uefnVerseFilters && uefnVerseLogs.active",
+          "group": "navigation@3"
+        },
+        {
+          "command": "uefnVerseLogs.clear",
+          "when": "view == uefnVerseFilters",
+          "group": "navigation@4"
+        },
+        {
+          "command": "uefnVerseLogs.editFilters",
+          "when": "view == uefnVerseFilters",
+          "group": "1_filters@1"
+        },
+        {
+          "command": "uefnVerseLogs.printOnly",
+          "when": "view == uefnVerseFilters",
+          "group": "1_filters@2"
+        },
+        {
+          "command": "uefnVerseLogs.resetFilters",
+          "when": "view == uefnVerseFilters",
+          "group": "1_filters@3"
+        },
+        {
+          "command": "uefnVerseLogs.openSettings",
+          "when": "view == uefnVerseFilters",
+          "group": "9_misc"
+        }
+      ],
+      "view/item/context": [
+        {
+          "command": "uefnVerseLogs.allCategoriesOn",
+          "when": "view == uefnVerseFilters && viewItem == section.categories",
+          "group": "inline@1"
+        },
+        {
+          "command": "uefnVerseLogs.allCategoriesOff",
+          "when": "view == uefnVerseFilters && viewItem == section.categories",
+          "group": "inline@2"
+        },
+        {
+          "command": "uefnVerseLogs.allLevelsOn",
+          "when": "view == uefnVerseFilters && viewItem == section.levels",
+          "group": "inline@1"
+        },
+        {
+          "command": "uefnVerseLogs.allLevelsOff",
+          "when": "view == uefnVerseFilters && viewItem == section.levels",
+          "group": "inline@2"
+        }
+      ],
+      "commandPalette": [
+        {
+          "command": "uefnVerseLogs.allCategoriesOn",
+          "when": "false"
+        },
+        {
+          "command": "uefnVerseLogs.allCategoriesOff",
+          "when": "false"
+        },
+        {
+          "command": "uefnVerseLogs.allLevelsOn",
+          "when": "false"
+        },
+        {
+          "command": "uefnVerseLogs.allLevelsOff",
+          "when": "false"
+        },
+        {
+          "command": "uefnVerseLogs.pause",
+          "when": "uefnVerseLogs.active && !uefnVerseLogs.paused"
+        },
+        {
+          "command": "uefnVerseLogs.resume",
+          "when": "uefnVerseLogs.active && uefnVerseLogs.paused"
+        },
+        {
+          "command": "uefnVerseLogs.stop",
+          "when": "uefnVerseLogs.active"
+        }
+      ]
+    },
+    "configuration": {
+      "title": "UEFN Verse Logs",
+      "properties": {
+        "uefnVerseLogs.autoStart": {
+          "type": "boolean",
+          "default": true,
+          "description": "Auto-start tailing the UEFN log when a workspace containing a .uefnproject is opened."
+        },
+        "uefnVerseLogs.logDirectory": {
+          "type": "string",
+          "default": "",
+          "description": "Directory containing UEFN .log files. Leave empty for %LOCALAPPDATA%\\UnrealEditorFortnite\\Saved\\Logs."
+        },
+        "uefnVerseLogs.logFileName": {
+          "type": "string",
+          "default": "UnrealEditorFortnite.log",
+          "description": "Name of the active UEFN log file inside the logs directory."
+        },
+        "uefnVerseLogs.categories": {
+          "type": "array",
+          "items": { "type": "string" },
+          "default": [
+            "LogVerse",
+            "LogVerseInterop",
+            "LogVerseMessageServer",
+            "LogVersePredicts",
+            "LogVerseUObjectGenerator",
+            "VerseBuild"
+          ],
+          "markdownDescription": "Categories shown in the filter panel. Lines are kept when their category **starts with** any of these. Add your own (e.g. `LogValkyrie`, `Cmd`, `LogFortMatchmakingV2`) to track non-Verse logs."
+        },
+        "uefnVerseLogs.pollIntervalMs": {
+          "type": "number",
+          "default": 500,
+          "minimum": 100,
+          "description": "Interval (ms) between log file polls. UEFN keeps the .log open with shared-read access, so polling is more reliable than fs.watch on Windows."
+        },
+        "uefnVerseLogs.showTimestamp": {
+          "type": "boolean",
+          "default": true,
+          "description": "Prefix each emitted line with the UEFN timestamp."
+        },
+        "uefnVerseLogs.showCategory": {
+          "type": "boolean",
+          "default": true,
+          "description": "Prefix each emitted line with its log category."
+        },
+        "uefnVerseLogs.showProjectHeader": {
+          "type": "boolean",
+          "default": true,
+          "description": "Print the detected UEFN project at the top of the output."
+        },
+        "uefnVerseLogs.revealOnError": {
+          "type": "boolean",
+          "default": false,
+          "description": "Reveal the output panel automatically when a new Error/Fatal line is emitted."
+        }
+      }
+    }
+  },
+  "scripts": {
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "@types/vscode": "^1.85.0",
+    "typescript": "^5.3.0"
+  }
+}
