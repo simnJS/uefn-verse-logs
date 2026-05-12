@@ -63,7 +63,7 @@ export function getConfig(): Config {
     logDirectory: cfg.get<string>('logDirectory') || defaultLogDir(),
     logFileName: cfg.get<string>('logFileName') || 'UnrealEditorFortnite.log',
     categories: cfg.get<string[]>('categories') ?? [...DEFAULT_CATEGORIES],
-    pollIntervalMs: cfg.get<number>('pollIntervalMs') ?? 500,
+    pollIntervalMs: cfg.get<number>('pollIntervalMs') ?? 100,
     autoStart: cfg.get<boolean>('autoStart') ?? true,
     showTimestamp: cfg.get<boolean>('showTimestamp') ?? false,
     showCategory: cfg.get<boolean>('showCategory') ?? true,

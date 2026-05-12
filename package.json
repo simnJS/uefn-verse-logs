@@ -304,9 +304,9 @@
         },
         "uefnVerseLogs.pollIntervalMs": {
           "type": "number",
-          "default": 500,
-          "minimum": 100,
-          "description": "Interval (ms) between log file polls. UEFN keeps the .log open with shared-read access, so polling is more reliable than fs.watch on Windows."
+          "default": 100,
+          "minimum": 25,
+          "description": "Interval (ms) between log file polls. Lower = faster Print() echo, higher = less CPU. UEFN keeps the .log open with shared-read access, so polling is more reliable than fs.watch on Windows."
         },
         "uefnVerseLogs.showTimestamp": {
           "type": "boolean",
