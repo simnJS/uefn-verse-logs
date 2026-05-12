@@ -2,7 +2,7 @@
   "name": "uefn-verse-logs",
   "displayName": "UEFN Verse Logs",
   "description": "Stream Verse logs from UEFN into VS Code with per-category and per-level filters.",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "publisher": "simnjs",
   "license": "MIT",
   "author": {
