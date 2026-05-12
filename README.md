@@ -36,7 +36,7 @@ If autostart didn't kick in, click the `Verse: stopped` indicator in the status 
 - **Filter tree** in the Explorer sidebar — checkboxes per category and per log level. State persists across sessions.
 - **Quick filter picker** (`UEFN Verse: Toggle filters…`) — fast multi-select for power users.
 - **"Print() only" preset** — one click, only `LogVerse` lines remain.
-- **Pause / resume** without stopping the tail or losing filter state.
+- **Restart command** to reset stats and re-detect the project without leaving the keyboard.
 - **Status bar** with live error and warning counts, click to reveal output.
 - **LogOutputChannel** with native level coloring (Debug / Info / Warning / Error).
 - **Polling-based** (not `fs.watch`) — reliable on Windows where UEFN keeps the `.log` file open in shared-read.
@@ -88,7 +88,7 @@ Save the file — the filter tree updates live.
 | `UEFN Verse: Watch latest log` | — | Start tailing `UnrealEditorFortnite.log`. |
 | `UEFN Verse: Start watching log…` | — | Pick any `.log` file in the UEFN logs folder. |
 | `UEFN Verse: Stop watching` | — | Stop the tail. |
-| `UEFN Verse: Pause` / `Resume` | — | Pause the stream without stopping the file watch. |
+| `UEFN Verse: Restart tail` | — | Stop and re-start the tail on the same log. Resets stats and re-detects the project. |
 | `UEFN Verse: Toggle filters…` | — | Multi-select picker for categories + levels. |
 | `UEFN Verse: Show Print() output only` | — | Preset: keep only `LogVerse`. |
 | `UEFN Verse: Reset filters` | — | Restore default checkbox state. |

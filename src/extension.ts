@@ -41,7 +41,6 @@ function updateStatus() {
     status.command = 'uefnVerseLogs.pickLatest';
     status.backgroundColor = undefined;
     setContext('uefnVerseLogs.active', false);
-    setContext('uefnVerseLogs.paused', false);
     status.show();
     return;
   }
@@ -50,11 +49,10 @@ function updateStatus() {
   const stats = tailer.currentStats;
   const errorBadge = stats.errors > 0 ? ` $(error) ${stats.errors}` : '';
   const warnBadge = stats.warnings > 0 ? ` $(warning) ${stats.warnings}` : '';
-  const pauseBadge = filters.paused ? ' $(debug-pause)' : '';
-  status.text = `$(eye) ${label}${pauseBadge}${errorBadge}${warnBadge}`;
+  status.text = `$(eye) ${label}${errorBadge}${warnBadge}`;
   status.tooltip = new vscode.MarkdownString(
     [
-      `**UEFN Verse** — ${filters.paused ? 'paused' : 'streaming'}`,
+      `**UEFN Verse** — streaming`,
       '',
       `\`${tailer.path}\``,
       '',
@@ -73,7 +71,6 @@ function updateStatus() {
       ? new vscode.ThemeColor('statusBarItem.warningBackground')
       : undefined;
   setContext('uefnVerseLogs.active', true);
-  setContext('uefnVerseLogs.paused', filters.paused);
   status.show();
 }
 
@@ -202,7 +199,7 @@ export async function activate(context: vscode.ExtensionContext) {
     onStateChange: () => updateStatus(),
     onStats: (stats: TailerStats) => {
       updateStatus();
-      if (stats.errors > 0 && getConfig().revealOnError && !filters.paused) {
+      if (stats.errors > 0 && getConfig().revealOnError) {
         output.show(true);
       }
     },
@@ -247,13 +244,14 @@ export async function activate(context: vscode.ExtensionContext) {
       tailer.stop();
       output.info('--- stopped ---');
     }),
-    vscode.commands.registerCommand('uefnVerseLogs.pause', () => {
-      filters.setPaused(true);
-      output.info('--- paused ---');
-    }),
-    vscode.commands.registerCommand('uefnVerseLogs.resume', () => {
-      filters.setPaused(false);
-      output.info('--- resumed ---');
+    vscode.commands.registerCommand('uefnVerseLogs.restart', async () => {
+      const currentPath = tailer.path;
+      if (!currentPath) {
+        await vscode.commands.executeCommand('uefnVerseLogs.pickLatest');
+        return;
+      }
+      tailer.stop();
+      await startTail(currentPath);
     }),
     vscode.commands.registerCommand('uefnVerseLogs.clear', () => output.clear()),
     vscode.commands.registerCommand('uefnVerseLogs.showOutput', () => output.show(true)),

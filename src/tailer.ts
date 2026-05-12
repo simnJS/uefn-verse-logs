@@ -132,8 +132,6 @@ export class Tailer {
       this.stats.totalLines++;
       statsChanged = true;
 
-      if (this.filters.paused) continue;
-
       const parsed = parseLine(line);
       if (!parsed) continue;
 

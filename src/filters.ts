@@ -10,7 +10,6 @@ const STATE_KEY = 'uefnVerseLogs.filterState.v1';
 interface PersistedFilters {
   categories: Record<string, boolean>;
   levels: Record<string, boolean>;
-  paused: boolean;
 }
 
 export class FilterState {
@@ -19,7 +18,6 @@ export class FilterState {
 
   readonly categories = new Map<string, boolean>();
   readonly levels = new Map<LogLevel, boolean>();
-  paused = false;
 
   constructor(private readonly storage: vscode.Memento) {
     this.load();
@@ -33,14 +31,12 @@ export class FilterState {
     for (const level of ALL_LEVELS) {
       this.levels.set(level, persisted?.levels[level] ?? true);
     }
-    this.paused = persisted?.paused ?? false;
   }
 
   private persist() {
     const data: PersistedFilters = {
       categories: Object.fromEntries(this.categories),
       levels: Object.fromEntries(this.levels) as Record<string, boolean>,
-      paused: this.paused,
     };
     void this.storage.update(STATE_KEY, data);
   }
@@ -53,12 +49,6 @@ export class FilterState {
 
   setLevel(level: LogLevel, enabled: boolean) {
     this.levels.set(level, enabled);
-    this.persist();
-    this._onChange.fire();
-  }
-
-  setPaused(paused: boolean) {
-    this.paused = paused;
     this.persist();
     this._onChange.fire();
   }
@@ -77,7 +67,6 @@ export class FilterState {
     this.levels.clear();
     for (const cat of getConfig().categories) this.categories.set(cat, categoryDefault(cat));
     for (const level of ALL_LEVELS) this.levels.set(level, true);
-    this.paused = false;
     this.persist();
     this._onChange.fire();
   }

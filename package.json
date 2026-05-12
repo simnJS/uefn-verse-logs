@@ -66,16 +66,10 @@
         "icon": "$(stop-circle)"
       },
       {
-        "command": "uefnVerseLogs.pause",
-        "title": "Pause",
+        "command": "uefnVerseLogs.restart",
+        "title": "Restart tail",
         "category": "UEFN Verse",
-        "icon": "$(debug-pause)"
-      },
-      {
-        "command": "uefnVerseLogs.resume",
-        "title": "Resume",
-        "category": "UEFN Verse",
-        "icon": "$(debug-start)"
+        "icon": "$(debug-restart)"
       },
       {
         "command": "uefnVerseLogs.clear",
@@ -146,13 +140,8 @@
           "group": "navigation@1"
         },
         {
-          "command": "uefnVerseLogs.resume",
-          "when": "view == uefnVerseFilters && uefnVerseLogs.active && uefnVerseLogs.paused",
-          "group": "navigation@1"
-        },
-        {
-          "command": "uefnVerseLogs.pause",
-          "when": "view == uefnVerseFilters && uefnVerseLogs.active && !uefnVerseLogs.paused",
+          "command": "uefnVerseLogs.restart",
+          "when": "view == uefnVerseFilters && uefnVerseLogs.active",
           "group": "navigation@1"
         },
         {
@@ -231,12 +220,8 @@
           "when": "false"
         },
         {
-          "command": "uefnVerseLogs.pause",
-          "when": "uefnVerseLogs.active && !uefnVerseLogs.paused"
-        },
-        {
-          "command": "uefnVerseLogs.resume",
-          "when": "uefnVerseLogs.active && uefnVerseLogs.paused"
+          "command": "uefnVerseLogs.restart",
+          "when": "uefnVerseLogs.active"
         },
         {
           "command": "uefnVerseLogs.stop",
